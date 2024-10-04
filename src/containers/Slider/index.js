@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
-import { getMonth } from "../../helpers/Date";
+import { MONTHS } from "../../helpers/Date";
 
 import "./style.scss";
 
 const Slider = () => {
+  const getMonth = (date) => MONTHS[date.getMonth() + 1];
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
