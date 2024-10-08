@@ -10,6 +10,7 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
+import ModalEvent from "../../containers/ModalEvent";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
@@ -115,20 +116,23 @@ const Page = () => {
       </div>
     </main>
     <footer className="row">
-      <div className="col presta">
-        <h3>Notre derniére prestation</h3>
-        { 
-          last && ( 
-            <EventCard
-            imageSrc={last.cover}
-            title={last.title}
-            date={new Date(last.date)}
-            small
-            label="boom"
-          />
-          )
-        }
-      </div>
+      {last && (
+        <div className="col presta">
+          <h3>Notre derniére prestation</h3>
+          <Modal key={last.id} Content={<ModalEvent event={last} />}>
+            {({ setIsOpened }) => ( 
+              <EventCard
+                onClick={() => setIsOpened(true)}
+                imageSrc={last.cover}
+                title={last.title}
+                date={new Date(last.date)}
+                small
+                label="boom"
+              />
+            )}
+          </Modal>
+        </div>
+      )}
       <div className="col contact">
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
